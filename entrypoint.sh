@@ -8,7 +8,7 @@ if [[ -z "${AlterID}" ]]; then
 fi
 
 if [[ -z "${V2_Path}" ]]; then
-  V2_Path="/FreeApp"
+  V2_Path="/"
 fi
 
 if [[ -z "${V2_QR_Path}" ]]; then
@@ -34,7 +34,7 @@ cd /v2raybin
 wget --no-check-certificate -qO 'v2ray.zip' "https://github.com/v2ray/v2ray-core/releases/download/$V_VER/v2ray-linux-$SYS_Bit.zip"
 unzip v2ray.zip
 rm -rf v2ray.zip
-chmod +x /v2raybin/v2ray-$V_VER-linux-$SYS_Bit/*
+chmod +x /v2raybin/*
 
 C_VER=`wget -qO- "https://api.github.com/repos/mholt/caddy/releases/latest" | grep 'tag_name' | cut -d\" -f4`
 mkdir /caddybin
@@ -51,7 +51,7 @@ wget --no-check-certificate -qO 'demo.tar.gz' "https://github.com/ki8852/v2ray-h
 tar xvf demo.tar.gz
 rm -rf demo.tar.gz
 
-cat <<-EOF > /v2raybin/v2ray-$V_VER-linux-$SYS_Bit/config.json
+cat <<-EOF > /v2raybin/config.json
 {
     "log":{
         "loglevel":"warning"
@@ -114,7 +114,7 @@ cat <<-EOF > /v2raybin/vmess.json
 EOF
 
 if [ "$AppName" = "no" ]; then
-  echo "不生成二维码"
+  echo "no QR code"
 else
   mkdir /wwwroot/$V2_QR_Path
   vmess="vmess://$(cat /v2raybin/vmess.json | base64 -w 0)" 
@@ -123,7 +123,7 @@ else
   echo -n "${vmess}" | qrencode -s 6 -o /wwwroot/$V2_QR_Path/v2.png
 fi
 
-cd /v2raybin/v2ray-$V_VER-linux-$SYS_Bit
+cd /v2raybin/
 ./v2ray &
 cd /caddybin
 ./caddy -conf="Caddyfile"
