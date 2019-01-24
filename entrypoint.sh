@@ -1,17 +1,17 @@
 #! /bin/bash
-if [[ -z "${UUID}" ]]; then
+if [ -z "${UUID}" ]; then
   UUID="4890bd47-5180-4b1c-9a5d-3ef686543112"
 fi
 
-if [[ -z "${AlterID}" ]]; then
+if [ -z "${AlterID}" ]; then
   AlterID="10"
 fi
 
-if [[ -z "${V2_Path}" ]]; then
+if [ -z "${V2_Path}" ]; then
   V2_Path="/"
 fi
 
-if [[ -z "${V2_QR_Path}" ]]; then
+if [ -z "${V2_QR_Path}" ]; then
   V2_QR_Code="1234"
 fi
 
@@ -19,9 +19,12 @@ rm -rf /etc/localtime
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 date -R
 
-SYS_Bit="$(getconf LONG_BIT)"
-[[ "$SYS_Bit" == '32' ]] && BitVer='_linux_386.tar.gz'
-[[ "$SYS_Bit" == '64' ]] && BitVer='_linux_amd64.tar.gz'
+SYS_Bit=64
+BitVer='_linux_amd64.tar.gz'
+
+#SYS_Bit="$(getconf LONG_BIT)"
+#[ "$SYS_Bit" == '32' ] && BitVer='_linux_386.tar.gz'
+#[ "$SYS_Bit" == '64' ] && BitVer='_linux_amd64.tar.gz'
 
 if [ "$VER" = "latest" ]; then
   V_VER=`wget -qO- "https://api.github.com/repos/v2ray/v2ray-core/releases/latest" | grep 'tag_name' | cut -d\" -f4`
