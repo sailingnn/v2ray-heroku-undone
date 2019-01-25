@@ -20,8 +20,8 @@
        "value": "10"
      }, 
     "V2_Path": {
-       "description": "Path路径，默认/FreeApp",
-       "value": "/FreeApp"
+       "description": "Path路径，默认/",
+       "value": "/"
      },
     "V2_QR_Path": {
        "description": "二维码和订阅地址路径，默认1234。如AppName变量为no，此变量没有作用",
