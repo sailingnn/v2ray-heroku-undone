@@ -29,11 +29,12 @@ BitVer='_linux_amd64.tar.gz'
 if [ "$VER" = "latest" ]; "
   V_VER=`wget -qO- "https://api.github.com/repos/v2ray/v2ray-core/releases/latest" | grep 'tag_name' | cut -d\" -f 4`
 else
-  V_VER="v$VER"
+  V_VER="$VER"
 fi
 
 mkdir /v2raybin
 cd /v2raybin
+echo "https://github.com/v2ray/v2ray-core/releases/download/$V_VER/v2ray-linux-$SYS_Bit.zip"
 wget --no-check-certificate -qO 'v2ray.zip' "https://github.com/v2ray/v2ray-core/releases/download/$V_VER/v2ray-linux-$SYS_Bit.zip"
 unzip v2ray.zip
 rm -rf v2ray.zip
