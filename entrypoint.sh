@@ -88,12 +88,12 @@ cat <<-EOF > /v2raybin/config.json
 EOF
 
 cat <<-EOF > /caddybin/Caddyfile
-http://0.0.0.0:${PORT}
+localhost:${PORT}
 {
 	root /wwwroot
 	index index.html
 	timeouts none
-	proxy ${V2_Path} localhost:2333 {
+	proxy ${V2_Path} 127.0.0.1:2333 {
 		websocket
 		header_upstream -Origin
 	}
