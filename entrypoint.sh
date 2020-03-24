@@ -26,7 +26,7 @@ BitVer='_linux_amd64.tar.gz'
 #[ "$SYS_Bit" == '32' ] && BitVer='_linux_386.tar.gz'
 #[ "$SYS_Bit" == '64' ] && BitVer='_linux_amd64.tar.gz'
 
-if [ "$VER" = "latest" ]; "
+if [ "$VER" = "latest" ]; then
   V_VER=`wget -qO- "https://api.github.com/repos/v2ray/v2ray-core/releases/latest" | grep 'tag_name' | cut -d\" -f 4`
 else
   V_VER="$VER"
